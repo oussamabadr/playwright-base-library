@@ -17,7 +17,7 @@ import loggingSetup from './logging.js'
 /**
  * @typedef configurations Configurations to run the automation
  * @type { object }
- * @property { boolean } DEMO_MODE 
+ * @property { boolean } DEMO_MODE
  */
 
 /**
@@ -44,9 +44,10 @@ const readlineInterface = readline.createInterface({ input, output });
 const setup = async () => {
   console.log('Starting Setup...');
 
+  assertFolderPathValue(LOGS_FOLDER_PATH, 'LOGS_FOLDER_PATH');
+
   loggingSetup(DEMO_MODE, LOGS_FOLDER_PATH);
 
-  assertFolderPathValue(LOGS_FOLDER_PATH, 'LOGS_FOLDER_PATH');
   assertFolderPathValue(SCREENSHOT_FOLDER_PATH, 'SCREENSHOT_FOLDER_PATH');
 
   assertEnvVariableValue(BASE_URL, 'BASE_URL');
@@ -164,7 +165,7 @@ const takeScreenshot = async (page, prefix = '') => {
 /**
  * Prompt a question to the user and wait for the answer
  * @param {string} question Question to ask to the user
- * @param {number} timeout Wait time (in seconds) for user input before throwing an error
+ * @param {number} timeout Wait time for user input before throwing an error
  * @returns {string} User input
  */
 const askUser = async (question, timeout = QUESTION_TIMEOUT_SECONDS) => {
@@ -194,7 +195,7 @@ const askUser = async (question, timeout = QUESTION_TIMEOUT_SECONDS) => {
 /**
  * Wait of the web page to load, we wait for the following event : domcontentloaded, load and networkidle
  * @param {playwright.Page} page The reference to the web page
- * @param {number} additionalWaitTimeSeconds Additional time to wait (in seconds) after the page is loaded
+ * @param {number} additionalWaitTimeSeconds Additional time to wait after the page is loaded
  */
 const waitEntirePageToLoad = async (page, additionalWaitTimeSeconds = DEFAULT_ADDITIONAL_WAIT_TIME_SECONDS) => {
   console.time('Page fully loaded.');
